@@ -60,6 +60,7 @@ export class ImageGallery extends Component {
           this.setState(prevState => ({
             images:
               page === 1 ? images.hits : [...prevState.images, ...images.hits],
+            query: nextName,
 
             status: Status.RESOLVED,
             totalPages: Math.floor(images.totalHits / 12),
@@ -71,11 +72,10 @@ export class ImageGallery extends Component {
 
   handleLoadMore = event => {
     event.preventDefault();
- 
 
     const { value: query } = this.props;
     this.setState(
-      prevState => ({ page: prevState.page + 1 }),
+      prevState => ({ page: prevState.page + 1, query: query }),
       () => {
         api
           .getImages(query, this.state.page)
