@@ -52,6 +52,7 @@ export class ImageGallery extends Component {
         status: Status.PENDING,
         images: [],
         page: 1,
+    
       });
 
       api
@@ -75,7 +76,7 @@ export class ImageGallery extends Component {
 
     const { value: query } = this.props;
     this.setState(
-      prevState => ({ page: prevState.page + 1, query: query }),
+      prevState => ({ page: prevState.page + 1, query }),
       () => {
         api
           .getImages(query, this.state.page)
