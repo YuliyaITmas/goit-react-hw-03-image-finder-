@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { api } from 'components/services/getImages';
 
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
@@ -20,6 +21,10 @@ const Status = {
 };
 
 export class ImageGallery extends Component {
+  static propTypes = {
+    value: PropTypes.string.isRequired,
+  };
+
   state = {
     query: '',
     images: [],
@@ -39,7 +44,7 @@ export class ImageGallery extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const { page, query } = this.state;
+    const { page } = this.state;
     const prevName = prevProps.value;
     const nextName = this.props.value;
     if (prevName !== nextName) {
@@ -66,6 +71,7 @@ export class ImageGallery extends Component {
 
   handleLoadMore = event => {
     event.preventDefault();
+ 
 
     const { value: query } = this.props;
     this.setState(
